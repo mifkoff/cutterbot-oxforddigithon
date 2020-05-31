@@ -119,30 +119,36 @@ def get_video_subtitles(video_id):
     print('subtitles:', subtitles)
     print('video_text:', video_text)
     print('summary_output:', summary_output)
-    return summary_timings  # TODO separate functions
+    return summary_timings, summary_output  # TODO separate functions
 
 
 def get_video_summary(url):
-    start_time = time.time()
+    try:
+        start_time = time.time()
 
-    yt_summary_timings = get_video_subtitles(video_id=video_id_extractor(url=url))
-    yt_file_name = 'youtube_video_{timestamp}.mp4'.format(
-        timestamp=time.time()
-    )
-    yt = YouTube(url).streams[0].download()
+        yt_summary_timings = get_video_subtitles(video_id=video_id_extractor(url=url))
+        summary_output = yt_summary_timings[1]
+        yt_summary_timings = yt_summary_timings[0]
+        yt_file_name = 'youtube_video_{timestamp}.mp4'.format(
+            timestamp=time.time()
+        )
+        yt = YouTube(url).streams[0].download()
 
-    subclips_list = get_subclips_list(file_name=yt, summary_timings=yt_summary_timings)
-    print('summary_timings:', yt_summary_timings)
-    print('yt:', yt)
-    print('subclips_list:', subclips_list)
-    final_video = concatenate_videoclips(subclips_list)
-    final_video.write_videofile('final_video.mp4',
-                                codec='libx264',
-                                audio_codec='aac',
-                                temp_audiofile='temp-audio.m4a',
-                                remove_temp=True
-                                )
-    print('Speed in sec:', time.time()-start_time)
+        subclips_list = get_subclips_list(file_name=yt, summary_timings=yt_summary_timings)
+        print('summary_timings:', yt_summary_timings)
+        print('yt:', yt)
+        print('subclips_list:', subclips_list)
+        final_video = concatenate_videoclips(subclips_list)
+        final_video.write_videofile('final_video.mp4',
+                                    codec='libx264',
+                                    audio_codec='aac',
+                                    temp_audiofile='temp-audio.m4a',
+                                    remove_temp=True
+                                    )
+        print('Speed in sec:', time.time()-start_time)
+        return summary_output
+    except Exception:
+        return False
 
 
 def prettify_output(text):
