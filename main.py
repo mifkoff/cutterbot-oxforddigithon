@@ -31,12 +31,15 @@ def echo_all(message):
 
             else:
                 page_text = get_page_text(url)
-                text_to_speech(page_text),
-                answer = get_summary(page_text)
-                bot.reply_to(message, answer)
-                # Audio
-                audio = open(content.audio_file_name, 'rb')
-                bot.send_audio(message.chat.id, audio)
+                if len(page_text) != 0:
+                    answer = get_summary(page_text)
+                    text_to_speech(answer)
+                    bot.reply_to(message, prettify_output(answer))
+                    # Audio
+                    audio = open(content.audio_file_name, 'rb')
+                    bot.send_audio(message.chat.id, audio)
+                else:
+                    bot.send_message(chat_id=message.chat.id, text='cannot do that')
 
 
 bot.polling()

@@ -26,17 +26,15 @@ youtube_video_lebedev = 'https://www.youtube.com/watch?v=WNjsBSQiqjo'
 
 def get_page_text(url):
     downloaded = trafilatura.fetch_url(url=url)
-    title = downloaded[1]
-    downloaded = downloaded[0]
     h = html2text.HTML2Text()
     h.ignore_links = True
     extracted_data = trafilatura.extract(downloaded)
     if extracted_data is not None:
         page_text_output = h.handle(extracted_data).replace('\n', ' ').replace('  ', ' ').strip()
         print('page_text_output len:', len(page_text_output))
-        return h.handle(trafilatura.extract(downloaded)).replace('\n', ' ').replace('  ', ' ').strip(), title
+        return h.handle(trafilatura.extract(downloaded)).replace('\n', ' ').replace('  ', ' ').strip()
     else:
-        return '', ''
+        return ''
 
 
 def is_url(url):
