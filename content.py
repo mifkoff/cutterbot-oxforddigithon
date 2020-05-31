@@ -13,3 +13,24 @@ languages = ['ru', 'en', 'de', 'es', 'aa', 'ab', 'af', 'ak', 'sq', 'am', 'ar', '
 audio_file_name = 'article_t2s.mp3'
 url_expression = 'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
 emojies = '😄😇😍😌😎🤪🤩😏🤯🤬🥴🤤👊🤝🤞✊✌️🤘👌☝️🦄🙈⚡️🔥🎲🚀💡💰💣🔮🦠🎁🎉📚📝❤️💔💖☢️⛔️💯⚠️🍭🍺🌚🌝'
+welcome_message = '''
+Hi there! 👋
+
+I am CutterBot but my target are articles and videos rather than people  😏
+I think you know that every second a lot of new information is published which makes it impossible to read and watch everything.
+I have a solution for you: send me a link for article or video, I will make summary and voice it so that it would be convinient for you to know information inside quickly.
+
+As an example, you can send me an article on Forbes, for example https://www.forbes.ru/billionaire-school/401131-kodeks-obshchezhitiya-kak-osnovateli-skyeng-ne-slomalis-na-starte
+'''
+answer_for_message_no_links = '''
+You message does not contain any URLs so that I cannot process it. 😔
+Please, send your link again
+'''
+answer_for_message_with_links = '''
+Got it! 🤪
+Will come back when I am done processing
+'''
+already_in_progress = 'Your link is already in work. Wait a little bit!'
+uploading_in_progress = 'Uploading your video 🔥'
+already_in_bot = 'You are in bot already 🥴'
+cannot_process = 'Sorry, I cannot process it. 😔'
