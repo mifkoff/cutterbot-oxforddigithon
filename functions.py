@@ -69,6 +69,7 @@ def text_to_speech(text):
 
 
 def get_summary(text):
+    print('text:', text)
     if len(text) > 0:
         r = requests.post(
             "https://api.deepai.org/api/summarization",
@@ -77,8 +78,11 @@ def get_summary(text):
             },
             headers={'api-key': config.deepai_api_key}
         )
-        print('len:', len(r.json()['output']))
-        return str(r.json()['output'])
+        if len(r.json()['output']) > 4000:
+            return get_summary(r.json()['output'])
+        else:
+            print('summary:', r.json())
+            return str(r.json()['output'])
     else:
         return False
 
