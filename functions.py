@@ -1,6 +1,9 @@
 import re
 
+import html2text
 import requests
+import trafilatura
+
 import config
 import content
 from youtube_transcript_api import YouTubeTranscriptApi
