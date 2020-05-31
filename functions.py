@@ -1,3 +1,5 @@
+import re
+
 import requests
 import config
 import content
@@ -17,6 +19,28 @@ youtube_video_en = 'https://www.youtube.com/watch?v=NUDMfaytP9s'
 youtube_video_ru = 'https://www.youtube.com/watch?v=TgYYyingKgs'
 youtube_video_korzh = 'https://www.youtube.com/watch?v=FikAr8UValg'
 youtube_video_lebedev = 'https://www.youtube.com/watch?v=WNjsBSQiqjo'
+
+
+def get_page_text(url):
+    downloaded = trafilatura.fetch_url(url=url)
+    title = downloaded[1]
+    downloaded = downloaded[0]
+    h = html2text.HTML2Text()
+    h.ignore_links = True
+    extracted_data = trafilatura.extract(downloaded)
+    if extracted_data is not None:
+        page_text_output = h.handle(extracted_data).replace('\n', ' ').replace('  ', ' ').strip()
+        print('page_text_output len:', len(page_text_output))
+        return h.handle(trafilatura.extract(downloaded)).replace('\n', ' ').replace('  ', ' ').strip(), title
+    else:
+        return '', ''
+
+
+def is_url(url):
+    if re.match(url_expression, url):
+        return True
+    else:
+        return False
 
 
 def speed_change(audio, speed=1.0):
