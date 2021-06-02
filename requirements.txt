@@ -40,7 +40,7 @@ tldextract==2.2.2
 tqdm==4.46.0
 trafilatura==0.4.1
 typing-extensions==3.7.4.2
-urllib3==1.25.9
+urllib3==1.26.5
 webrtcvad==2.0.10
 websocket-client==0.44.0
 youtube-transcript-api==0.3.1
