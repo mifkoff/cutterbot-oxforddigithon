@@ -19,7 +19,7 @@ jusText==2.2.0
 langdetect==1.0.8
 lxml==4.5.1
 moviepy==1.0.3
-numpy==1.18.4
+numpy==1.22.0
 Pillow==7.1.2
 proglog==0.1.9
 pydub==0.24.0
